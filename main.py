@@ -36,8 +36,8 @@ def hello_world(request):
     if request.args and 'message' in request.args:
         print("Request.args is ",request.args.get('message'))
         return request.args.get('message')
-    elif request_json and 'message' in request_json:
-        print("Request_json is", request_json['message'])
+    elif request_json and 'attributes' in request_json:
+        print("Request_json is", request_json['attributes'])
         return request_json['message']
     else:
         return f'Hello World!'
