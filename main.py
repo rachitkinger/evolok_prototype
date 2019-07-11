@@ -44,6 +44,6 @@ def hello_world(request):
     #     return request_json['message']
     # else:
     #     return f'Hello World!'
-    print("Request attributes are ",request_json['attributes'])
+    print("Request attributes are ",request_json)
     return f'Hello World!'
     
