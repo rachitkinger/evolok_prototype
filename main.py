@@ -17,28 +17,23 @@ def upload_to_bucket(bucket_name, blob_name, blob_content):
     blob.upload_from_string(blob_content)
     return print('File name {} uploaded to bucket {}'.format(blob_name,bucket_name))
 
-    
-def hello_world(request):
-    """Responds to any HTTP request.
+def recieve_evolok(request):
+    """Responds to any HTTP request. Sends Evolok webhooks to GCS bucket named 'rk-test1'.
+    ---
     Args:
         request (flask.Request): HTTP request object.
     Returns:
-        The response text or any set of values that can be turned into a
-        Response object using
-        `make_response <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>`.
+        str. Status of upload to GCS
     """
     request_json = request.get_json()
-    # if request.args and 'message' in request.args:
-    #     print("Request.args is ",request.args.get('message'))
-    #     return request.args.get('message')
-    # elif request_json and 'message' in request_json:
-    #     print("Request_json is ", request_json['message'])
-    #     return(request_json['message'])
-    # elif request_json and 'attributes' in request_json:
-    #     print("Request_json is", request_json['attributes'])
-    #     return request_json['message']
-    # else:
-    #     return f'Hello World!'
-    print("Request attributes are ",request_json)
-    return f'Hello World!'
-    
+    if request_json and 'created' in request_json:
+        blob_name = request_json['created']
+        blob_content = request_json
+        #TODO change bucket name for production
+        bucket_name = "rk-test1"
+        result = upload_to_bucket(bucket_name,blob_name,blob_content)
+        print(result)
+        return result
+    else:
+        print('Error: Unexpected content in webhook')
+        return f'Unexpected content in webhook'
