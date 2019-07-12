@@ -15,7 +15,7 @@ def upload_to_bucket(bucket_name, blob_name, blob_content):
     print("storage client executed")
     myBucket = storage_client.get_bucket(bucket_name)
     print("bucket name registered")
-    blob = myBucket.blob(blob_name)
+    blob = myBucket.blob(str(blob_name))
     print("blob registered")
     print("blob content type is")
     print(type(blob_content))
