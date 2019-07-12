@@ -16,7 +16,7 @@ def upload_to_bucket(bucket_name, blob_name, blob_content):
     blob.upload_from_string(blob_content)
     return print('File name {} uploaded to bucket {}'.format(blob_name,bucket_name))
 
-def recieve_evolok(request):
+def receive_evolok(request):
     """Responds to any HTTP request. Sends Evolok webhooks to GCS bucket named 'rk-test1'.
     ---
     Args:
