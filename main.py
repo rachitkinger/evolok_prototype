@@ -10,8 +10,7 @@ def upload_to_bucket(bucket_name, blob_name, blob_content):
     Returns:
         NoneType
         """
-    #TODO Remove service key path before committing
-    storage_client = storage.Client.from_service_account_json("/home/rachit/gdrive/GCP/service-account-key/rachit-kinger-service-key.json")
+    storage_client = storage.Client()
     myBucket = storage_client.get_bucket(bucket_name)
     blob = myBucket.blob(blob_name)
     blob.upload_from_string(blob_content)
@@ -29,7 +28,6 @@ def recieve_evolok(request):
     if request_json and 'created' in request_json:
         blob_name = request_json['created']
         blob_content = request_json
-        #TODO change bucket name for production
         bucket_name = "rk-test1"
         result = upload_to_bucket(bucket_name,blob_name,blob_content)
         print(result)
