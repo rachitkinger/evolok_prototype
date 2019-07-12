@@ -10,8 +10,11 @@ def upload_to_bucket(bucket_name, blob_name, blob_content):
     Returns:
         NoneType
         """
+    print("received requesnt to upload {}".format(blob_content))
     storage_client = storage.Client()
+    print("storage client executed")
     myBucket = storage_client.get_bucket(bucket_name)
+    print("bucket name registered")
     blob = myBucket.blob(blob_name)
     blob.upload_from_string(blob_content)
     return print('File name {} uploaded to bucket {}'.format(blob_name,bucket_name))
@@ -25,10 +28,15 @@ def receive_evolok(request):
         str. Status of upload to GCS
     """
     request_json = request.get_json()
+    print("request json successful")
     if request_json and 'payload' in request_json:
+        print("entered if statement")
         blob_name = request_json['payload']['created']
+        print("blob name is {}".format(blob_name))
         blob_content = request_json
+        print("blob_content is {}".format(blob_content))
         bucket_name = "rk-test1"
+        print("Sending request for upload")
         result = upload_to_bucket(bucket_name,blob_name,blob_content)
         print(result)
         return result
