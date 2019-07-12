@@ -1,4 +1,5 @@
 from google.cloud import storage
+import json
 def upload_to_bucket(bucket_name, blob_name, blob_content):
     """Upload blob content as is into a named bucket
 
@@ -19,7 +20,11 @@ def upload_to_bucket(bucket_name, blob_name, blob_content):
     print("blob registered")
     print("blob content type is")
     print(type(blob_content))
-    blob.upload_from_string(blob_content)
+    content = json.dumps(blob_content)
+    print("blob content convert into json dump")
+    print(type(content))
+    blob.upload_from_string(content)
+    print('blob uploaded')
     return print('File name {} uploaded to bucket {}'.format(blob_name,bucket_name))
 
 def receive_evolok(request):
