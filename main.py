@@ -25,8 +25,8 @@ def recieve_evolok(request):
         str. Status of upload to GCS
     """
     request_json = request.get_json()
-    if request_json and 'created' in request_json:
-        blob_name = request_json['created']
+    if request_json and 'payload' in request_json:
+        blob_name = request_json['payload']['created']
         blob_content = request_json
         bucket_name = "rk-test1"
         result = upload_to_bucket(bucket_name,blob_name,blob_content)
