@@ -37,3 +37,13 @@ def receive_evolok(request):
     else:
         print('Exited function: Unexpected payload structure sent from in webhook')
         return f'Unexpected payload structure in webhook'
+
+def parse_payload(payload):
+    """
+    Converts payload into a row that can be entered BigQuery table
+    :param payload: dict object as converted from flast.Request.get_json()
+    :return: json as required by a specific BigQuery table
+    """
+    #TODO BigQuery table needs to be created
+    
+    return None
